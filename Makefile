@@ -1,7 +1,7 @@
 
 .EXPORT_ALL_VARIABLES:
 
-NAMESPACE := global-redirects
+NAMESPACE := nginx-ingress
 
 DEFAULT_OWNER := jencub@gmail.com
 
