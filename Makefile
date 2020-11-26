@@ -12,14 +12,7 @@ DEV_ZONE ?= australia-southeast1-c
 YAMLLINT := $(shell command -v yamllint 2> /dev/null)
 JQ := $(shell command -v jq 2> /dev/null)
 
-init: .git/hooks/pre-commit
-
-.git/hooks/%:
-	@chmod 755 .githooks/*
-	@find .git/hooks -type l -exec rm {} \;
-	@find .githooks -type f -exec ln -sf ../../{} .git/hooks/ \;
-
-lint: init lint-json
+lint: lint-json
 
 lint-yaml:
 ifdef YAMLLINT
