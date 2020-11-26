@@ -5,7 +5,7 @@ docker_auth: &docker_auth
 
 defaults: &defaults
   docker:
-    - image: greenpeaceinternational/circleci-base:latest
+    - image: jencub2/circleci-base:latest
       auth:
         <<: *docker_auth
 
@@ -42,26 +42,10 @@ jobs:
             EXTRA_TEXT="\`\`\`$(cat /tmp/job.log)\`\`\`" \
             notify-job-failure.sh
 
-  prodprep:
-    <<: *defaults
-    steps:
-      - checkout
-      - run: mkdir /tmp/artifacts
-      - run: make prodprep | tee /tmp/artifacts/job.log
-      - store_artifacts:
-          path: /tmp/artifacts
-      - run:
-          name: Notify failure
-          when: on_fail
-          command: |
-            TYPE="Lint" \
-            EXTRA_TEXT="\`\`\`$(cat /tmp/job.log)\`\`\`" \
-            notify-job-failure.sh
-
   dev:
     <<: *defaults
     environment:
-      GOOGLE_PROJECT_ID: planet-4-151612
+      GOOGLE_PROJECT_ID: jendevops1
     steps:
       - checkout
       - run: mkdir /tmp/artifacts
@@ -84,32 +68,6 @@ jobs:
           EXTRA_TEXT="\`\`\`$(cat /tmp/artifacts/job.log)\`\`\`"  \
           notify-job-success.sh
 
-  prod:
-    <<: *defaults
-    environment:
-      GOOGLE_PROJECT_ID: planet4-production
-    steps:
-      - checkout
-      - run: mkdir /tmp/artifacts
-      - run: activate-gcloud-account.sh
-      - deploy:
-          name: Deploy to production cluster
-          command: make prod | tee /tmp/artifacts/job.log
-      - run: cp -R ingress /tmp/artifacts
-      - store_artifacts:
-          path: /tmp/artifacts
-      - run:
-          name: Notify failure
-          when: on_fail
-          command: |
-            TYPE="Test" \
-            EXTRA_TEXT="\`\`\`$(cat /tmp/artifacts/job.log)\`\`\`" \
-            notify-job-failure.sh
-      - run: |
-          TYPE="Deploy" \
-          EXTRA_TEXT="\`\`\`$(cat /tmp/artifacts/job.log)\`\`\`"  \
-          notify-job-success.sh
-
 workflows:
   version: 2
   commit:
@@ -117,8 +75,6 @@ workflows:
       - lint:
           context: org-global
       - devprep:
-          context: org-global
-      - prodprep:
           context: org-global
       - dev:
           context: org-global
@@ -128,11 +84,3 @@ workflows:
             branches:
               only:
                 - develop
-      - prod:
-          context: org-global
-          requires:
-            - prodprep
-          filters:
-            branches:
-              only:
-                - master

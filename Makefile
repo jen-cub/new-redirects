@@ -3,15 +3,11 @@
 
 NAMESPACE := global-redirects
 
-DEFAULT_OWNER := global-it-operation@greenpeace.org
+DEFAULT_OWNER := jencub@gmail.com
 
-DEV_CLUSTER ?= p4-development
-DEV_PROJECT ?= planet-4-151612
-DEV_ZONE ?= us-central1-a
-
-PROD_CLUSTER ?= planet4-production
-PROD_PROJECT ?= planet4-production
-PROD_ZONE ?= us-central1-a
+DEV_CLUSTER ?= testrc
+DEV_PROJECT ?= jendevops1
+DEV_ZONE ?= australia-southeast1-c
 
 YAMLLINT := $(shell command -v yamllint 2> /dev/null)
 JQ := $(shell command -v jq 2> /dev/null)

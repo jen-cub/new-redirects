@@ -4,8 +4,8 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: redirects-nginx
-    p4.kubernetes.io/redirect-owners: "{{ .Env.OWNERS }}"
-    p4.kubernetes.io/redirect-description: "{{ .Env.DESCRIPTION }}"
+    kubernetes.io/redirect-owners: "{{ .Env.OWNERS }}"
+    kubernetes.io/redirect-description: "{{ .Env.DESCRIPTION }}"
     nginx.ingress.kubernetes.io/rewrite-target: "https://{{ .Env.TO }}/$1"
     cert-manager.io/issuer: letsencrypt-prod
   labels:
@@ -23,5 +23,5 @@ spec:
         paths:
           - path: /(.*)
             backend:
-              serviceName: p4-robots-static
+              serviceName: global-brb-static
               servicePort: 80

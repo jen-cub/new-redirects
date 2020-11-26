@@ -4,23 +4,12 @@
       "owners": [
         {
          "name": "P4 Administrator",
-         "email": "planet4.ops@greenpeace.org",
+         "email": "jencub@gmail.com",
          "unit": "GPI Operations"
         }
       ],
-      "from": "jencub.club",
-      "to": "k8s.p4.greenpeace.org/jctest"
+      "from": "www.jencub.xyz",
+      "to": "jencub.xyz"
     },
-    {
-      "owners": [
-        {
-         "name": "P4 Administrator",
-         "email": "planet4.ops@greenpeace.org",
-         "unit": "GPI Operations"
-        }
-      ],
-      "from": "www.jencub.club",
-      "to": "k8s.p4.greenpeace.org/jctest"
-    }
   ]
 }
