@@ -9,7 +9,7 @@
         }
       ],
       "from": "www.jencub.xyz",
-      "to": "jencub.xyz"
+      "to": "jencub.xyz/$1"
     }
  ]
 }
