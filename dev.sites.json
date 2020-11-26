@@ -11,5 +11,16 @@
       "from": "www.jencub.xyz",
       "to": "jencub.xyz"
     }
+    {
+      "owners": [
+        {
+         "name": "P4 Administrator",
+         "email": "jencub@gmail.com",
+         "unit": "GPI Operations"
+        }
+      ],
+      "from": "k8s.jencub.xyz",
+      "to": "jencub.xyz"
+    }
   ]
 }
